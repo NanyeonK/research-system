@@ -325,6 +325,10 @@ Goal
 
 Move from research evidence to prose under the existing writing system. v2 does not replace this phase. It prepares the handoff and then uses the writing system controls.
 
+Bridge contract
+
+Phase 5 uses `references/writing_system_bridge.md` as the entry contract for writing handoff. The bridge defines the same writing evidence packet required here: project state, source context, decision log, next actions, mapped exhibits, locked specs, claim verification, integrity and gate status artifacts, waivers, invalidation records, section and paragraph map, claim boundaries, and style constraints. If Phase 5 and the bridge appear to differ, treat them as one contract and update both before starting prose. The writing system begins only after this shared evidence packet exists.
+
 Primary owner
 
 Writing system workflow with Claude Code active only for writing system handoff when assigned. Codex master remains responsible for ensuring the handoff packet is complete before the writing system starts.
