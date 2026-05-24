@@ -65,6 +65,22 @@ target journal/style constraints, if known
 
 The writing system may draft only within that packet. Before paragraph-level drafting, Yeonchan must be able to inspect the publishable tables/figures and a section/paragraph map that states one sentence per section and one sentence per planned paragraph. Unsupported claims must be marked with `[GAP: ...]` or `[ASSUMPTION: ...]`. Legacy/equivalent paths count only when mapped; unmapped equivalents block handoff.
 
+## Handoff verifier
+
+Before prose drafting begins, run the deterministic first-pass verifier:
+
+```bash
+python3 /Users/nanyeon/Library/CloudStorage/SynologyDrive-second_brain/research_paper_system/scripts/verify_writing_handoff_packet.py <project_root>
+```
+
+Verifier statuses:
+
+- `READY`: the required packet is present, `qa/gate_status.yaml` permits writing handoff, and no waiver or limitation signal is active.
+- `READY_WITH_WAIVERS`: the required packet is present and handoff is allowed, but active waivers, mapped equivalents, or `PASS_WITH_LIMITATIONS` items narrow what the writing system may claim.
+- `BLOCKED`: required artifacts are missing or unmapped, `qa/gate_status.yaml` does not permit writing handoff, a human-audit packet is missing, an invalidation remains open, or a blocking gate value remains.
+
+The verifier is not a scholarly approval. It checks packet completeness and machine-readable blockers only. Yeonchan or the assigned human reviewer still owns publishability, novelty, identification, and claim strength decisions.
+
 ## Routing rules
 
 - For writing-only tasks, start at `/Users/nanyeon/Library/CloudStorage/SynologyDrive-second_brain/writing_system/START_HERE.md`.

@@ -207,12 +207,20 @@ Referee audit or submission readiness is blocked when:
 - unresolved `BLOCKING` audit issues remain
 - `ADVERSARIAL_CRITICAL` findings are unresolved or not accepted as explicit limitations
 
-## Verification helper
+## Verification helpers
 
-Run:
+Run the general gate-status verifier:
 
 ```bash
 python3 /Users/nanyeon/Library/CloudStorage/SynologyDrive-second_brain/research_paper_system/scripts/verify_research_gate_status.py <project_root>
 ```
 
-The helper is a deterministic first-pass check. It does not replace human or referee judgment. Use `04_templates/audit_ownership_matrix_template.md` to make the split explicit: machine checks presence, schema, identifiers, numeric consistency, and stale states; Yeonchan or a human scholarly reviewer checks novelty, identification, mechanism, exhibit publishability, target fit, and waiver acceptability.
+Run the research-to-writing packet verifier before prose drafting:
+
+```bash
+python3 /Users/nanyeon/Library/CloudStorage/SynologyDrive-second_brain/research_paper_system/scripts/verify_writing_handoff_packet.py <project_root>
+```
+
+The handoff verifier reports `READY`, `READY_WITH_WAIVERS`, or `BLOCKED`. `READY_WITH_WAIVERS` means the packet is complete enough to enter writing, but active waivers, mapped equivalents, or limitation-bearing gates narrow what can be claimed.
+
+The helpers are deterministic first-pass checks. They do not replace human or referee judgment. Use `04_templates/audit_ownership_matrix_template.md` to make the split explicit: machine checks presence, schema, identifiers, numeric consistency, and stale states; Yeonchan or a human scholarly reviewer checks novelty, identification, mechanism, exhibit publishability, target fit, and waiver acceptability.
