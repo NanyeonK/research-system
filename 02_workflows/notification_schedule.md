@@ -32,8 +32,8 @@ Critical notifications may push immediately during work hours. After 20:00 they 
 
 Critical categories:
 
-- Human Gate 1 reached after Phase 2 pilot.
-- Human Gate 2 reached after Phase 3 main analysis.
+- Human `gate_4` reached after Phase 2 pilot.
+- Human `gate_6` reached after Phase 3 main analysis.
 - A lane needs to change locked spec, sample, estimator, outcome, preprocessing, or claim mapping.
 - A direct threat paper appears that may change novelty or claim strength.
 - A long-running job failed in a way that risks losing state or wasting large compute.
@@ -57,7 +57,7 @@ Non-critical categories:
 
 ## 5. Human gate immediate push rule
 
-When Human Gate 1 or Human Gate 2 is reached during work hours, push immediately. The notification should include the gate packet path, recommended decision, risks, and exact options. Do not continue past the gate until Chan records a decision.
+When `gate_4` or `gate_6` is reached during work hours, push immediately. The notification should include the gate packet path, recommended decision, risks, and exact options. Do not continue past the gate until Chan records a decision.
 
 When a human gate is reached after 20:00, prepare the gate packet and include it in the 20:00 handoff if possible. If it is reached later, push only if Chan has opted into after-hours gate notifications or the project has a critical deadline.
 
@@ -84,7 +84,7 @@ Project-local configs may add deadline windows, but they must not create live ex
 
 Hermes may deliver notifications through dashboard, changelog mirror, Telegram bridge, or configured Slack bridge. Channel tokens and IDs must live in `.env` or local config outside the public repo.
 
-`04_templates/dashboard_schema.yaml` defines the minimum read-only dashboard fields and the mapping from dashboard state to critical, digest, or silent notification handling. The dashboard is visibility only. It must not infer gate pass status, cross human gates, edit project repos, or expose private channel identifiers.
+`04_templates/dashboard_schema.yaml` defines the minimum read-only dashboard fields, the `open_human_gates` labels (`gate_4`, `gate_6`, or both), and the mapping from dashboard state to critical, digest, or silent notification handling. The dashboard is visibility only. It must not infer gate pass status, cross human gates, edit project repos, or expose private channel identifiers.
 
 `04_templates/work_hours.yaml` contains placeholders only. Do not commit real bot tokens, chat IDs, Slack channel IDs, or private webhook URLs.
 
