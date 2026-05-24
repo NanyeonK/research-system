@@ -1,0 +1,58 @@
+# macOS / editor
+.DS_Store
+*.swp
+*.swo
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets / local config
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.sqlite
+*.db
+*.db-*
+
+# Large/binary research artifacts
+*.pdf
+*.docx
+*.xlsx
+*.xls
+*.zip
+*.tar
+*.tar.gz
+*.parquet
+*.feather
+*.pkl
+*.rds
+*.RData
+
+# Local system evolution logs: keep in vault, not public repo
+05_runs/
+
+# Writing system compatibility redirects and writing-specific files.
+# Public repo is research-system only; sibling writing_system is not published here.
+writing_system/
+references/writing_system_bridge.md
+01_policies/voice_*
+01_policies/writing_*
+01_policies/manuscript_format_style.md
+01_policies/paulgp_style_adaptation.md
+01_policies/human_revision_adaptation.md
+01_policies/voice_external_integration_*.md
+01_policies/table_figure_style.md
+02_workflows/prose_lint*
+02_workflows/paper_cowrite.md
+02_workflows/writing_kickoff_deep_interview.md
+02_workflows/voice_update.md
+02_workflows/table_generation.md
+04_templates/first_deep_interview_form.md
+04_templates/exhibit_deep_interview_form.md
+04_templates/referee_response_template.md
