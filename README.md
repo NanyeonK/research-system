@@ -18,6 +18,8 @@ The writing system is independent. This research system hands off to it through 
 
 ## Scope
 
+v2 pipeline is documented in `02_workflows/research_pipeline_v2.md`; legacy lifecycle policy remains controlling unless v2 explicitly supersedes.
+
 This system owns:
 - early research idea screening and go/no-go gates
 - research project structure and project state files

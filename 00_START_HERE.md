@@ -16,6 +16,8 @@ Canonical roots:
 
 ## Minimum load order for research tasks
 
+v2 pipeline is documented in `02_workflows/research_pipeline_v2.md`; legacy lifecycle policy remains controlling unless v2 explicitly supersedes.
+
 1. `01_policies/paper_project_framework.md`
 2. `02_workflows/project_structure.md` when starting, moving, or resuming a research project
 3. `02_workflows/idea_evaluation.md`, `04_templates/idea_evaluation_template.md`, and `04_templates/literature_map_template.md` when screening a new idea before project start
