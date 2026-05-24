@@ -2,10 +2,14 @@
 
 Purpose: define how a research project repository should be organized as an idea moves from rough concept to literature map, project promotion, specs, pilot, analysis, exhibits, writing handoff, review, and submission.
 
+v2 priority note: `02_workflows/research_pipeline_v2.md` is the controlling layout for v2 projects when it conflicts with older phase names in this document. Older phase sections remain useful for legacy projects and migration audits. New v2 projects should use the phase-prefixed layout below.
+
 This workflow complements:
+- `02_workflows/research_pipeline_v2.md`
 - `02_workflows/idea_evaluation.md`
 - `02_workflows/project_structure.md`
 - `02_workflows/specification_lock.md`
+- `01_policies/archive_policy.md`
 - `references/writing_system_bridge.md`
 - `02_workflows/gate_status_protocol.md`
 
@@ -31,6 +35,66 @@ Every phase must answer:
 - where machine outputs are stored
 - where human decisions are recorded
 - which artifacts are active vs superseded
+
+## v2 Phase-Prefixed Layout
+
+New v2 projects use the phase-prefixed layout from `02_workflows/research_pipeline_v2.md`. The phase folders hold phase-specific planning, outputs, and integration memos. Cross-cutting folders hold live contracts and audit files.
+
+```text
+<repo_name>/
+  README.md
+  project_state.md
+  decision_log.md
+  next_actions.md
+  source_context.md
+  research_log.md
+  CHANGELOG.md
+  MANIFEST.md
+  00_phase_router/
+  01_data_planning/
+  02_pilot/
+  03_main_analysis/
+  04_skeleton/
+  05_writing_handoff/
+  06_replication/
+  specs/
+  qa/
+  refs/
+  logs/
+  99_archive/
+```
+
+`00_phase_router/` records entry routing, research type classification, Phase 0 literature scans, and route decisions.
+
+`01_data_planning/` records wide, mid, and detailed plans for data, method, literature, pilot scope, and early exhibit logic.
+
+`02_pilot/` records pilot design, pilot execution, pilot results, pilot limitations, minimax review, and Human Gate 1 packet.
+
+`03_main_analysis/` records main results, lane outputs, robustness results, novelty scan, Figure 1 hook candidates, minimax lane reviews, and Human Gate 2 packet.
+
+`04_skeleton/` records idea-result diff, paper spine, exhibit map, section skeleton, and writing handoff packet.
+
+`05_writing_handoff/` records research-to-writing handoff state. It does not replace the sibling writing system. It stores the research evidence packet that the writing system consumes.
+
+`06_replication/` records dependency graph, master script, environment locks, hash ledger, README, self-test log, and upload-ready package state.
+
+## Cross-Cutting Live Layers
+
+`specs/` remains live. It contains `main_spec.md`, `data_spec.md`, `preprocessing_spec.md`, `methodology_spec.md`, `output_spec.md`, `spec_change_log.md`, and topic-specific refinements when needed. Do not move active specs into archive during phase transitions.
+
+`qa/` remains live. It contains `gate_status.yaml`, `source_verification.md`, `claim_verification_matrix.md`, `integrity_gate.md`, `waiver_log.md`, `artifact_mapping.md`, and `invalidation_ledger.md` when needed. Do not move active QA state into archive.
+
+`refs/` stores active literature maps, source roles, citation metadata, and paper request state. When a literature branch is superseded, archive the superseded branch under `99_archive/` but keep the active map in `refs/`.
+
+`logs/` stores machine logs and execution notes that need to remain discoverable across phases. Large generated logs may be summarized and archived if they are not active gate evidence.
+
+`99_archive/` stores superseded thinking and reusable alternatives. It is governed by `01_policies/archive_policy.md`.
+
+## v2 Archive Boundary
+
+Archive wide plans, dropped findings, pivoted alternatives, alternative specs, and reusable components. Do not archive live `specs/`, live `qa/`, current `project_state.md`, current `decision_log.md`, current `CHANGELOG.md`, or the accepted writing handoff packet.
+
+`99_archive/INDEX.md` should list every archived bundle, original path, archive path, reason, date, and whether it can be reused.
 
 ## Phase 0 — Rough Idea Before Repo
 
