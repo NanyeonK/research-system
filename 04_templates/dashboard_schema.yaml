@@ -1,0 +1,173 @@
+schema_name: research_stage_dashboard
+schema_version: 1
+status: template
+purpose: >-
+  Define the minimum read-only dashboard shape for v2 research projects.
+  The dashboard surfaces phase, gate, human-audit, blocker, and notification
+  state. It does not make research decisions, cross gates, nudge workers, or
+  replace repo-local QA files.
+
+scope:
+  mode: read_only
+  owner: hermes
+  source_of_truth:
+    project_state: project_state.md
+    gate_status: qa/gate_status.yaml
+    human_audit_packet: qa/human_audit_request.md
+    next_actions: next_actions.md
+    decision_log: decision_log.md
+    agent_status: AGENT_STATUS.md
+  forbidden_actions:
+    - edit_project_repo
+    - cross_human_gate
+    - infer_gate_pass_from_notification_text
+    - expose_private_tokens_or_chat_ids
+    - trigger_live_external_side_effects
+
+refresh:
+  timezone: Asia/Seoul
+  default_interval_minutes: 10
+  stdout_policy: silent_unless_critical
+  critical_stdout_events:
+    - human_gate_packet_ready
+    - human_audit_packet_ready
+    - server_repo_branch_conflict
+    - compute_or_state_loss_risk
+
+project_row:
+  required_fields:
+    project:
+      type: string
+      description: Human-readable project slug or short name.
+    server:
+      type: string
+      allowed_values:
+        - server1
+        - server2
+        - server3
+        - local
+      description: Execution node or local control-tower scope.
+    repo_path:
+      type: string
+      description: Canonical project path. Use project-local path, not a secret mount.
+    agent_status:
+      type: string
+      allowed_values:
+        - active
+        - idle
+        - parked
+        - failed
+        - unknown
+    research_system_stage:
+      type: string
+      description: Current phase or stage as read from project_state.md or qa/gate_status.yaml.
+    gate:
+      type: string
+      description: Current gate status from qa/gate_status.yaml.
+    human_audit:
+      type: string
+      allowed_values:
+        - false
+        - human_gate_1_ready
+        - human_gate_2_ready
+        - human_audit_packet_ready
+        - human_audit_packet_missing
+    next_indexed_action:
+      type: string
+      description: Next allowed action from next_actions.md or gate_status.yaml.
+  optional_fields:
+    branch:
+      type: string
+    last_commit:
+      type: string
+    last_artifact_path:
+      type: string
+    updated_at:
+      type: datetime
+    parked_reason:
+      type: string
+    notification_class:
+      type: string
+      allowed_values:
+        - critical
+        - digest
+        - silent
+
+human_audit_queue:
+  include_when: human_audit_not_false
+  required_fields:
+    project:
+      type: string
+    packet_status:
+      type: string
+      allowed_values:
+        - READY
+        - MISSING_REQUIRED_PACKET
+    plain_language_question:
+      type: string
+    packet_path:
+      type: string
+      expected_value: qa/human_audit_request.md
+  required_packet_markers:
+    - "## 1. Plain-language question"
+    - "## 2. Why this is being asked now"
+    - "## 3. Evidence inspected"
+    - "## 4. Options"
+    - "## 5. Agent recommendation"
+    - "## 6. Exact approval phrase"
+    - "## 7. After-decision execution plan"
+
+notification_mapping:
+  critical_if:
+    - human_gate_1_ready
+    - human_gate_2_ready
+    - human_audit_packet_ready
+    - locked_spec_change_needed
+    - direct_threat_changes_novelty
+    - integrity_gate_blocks_handoff
+    - server_repo_branch_conflict
+    - compute_or_state_loss_risk
+    - external_side_effect_needs_approval
+  digest_if:
+    - routine_lane_completion
+    - artifact_written_no_blocker
+    - smoke_test_passed
+    - documentation_update
+    - literature_scan_no_direct_threat
+    - dashboard_mirror_updated
+    - archive_index_updated
+  silent_if:
+    - no_state_change
+    - unchanged_poll
+    - parked_project_without_reactivation
+
+rendering:
+  markdown_table:
+    columns:
+      - Project
+      - Server
+      - Agent status
+      - Research-system stage
+      - Gate
+      - Human audit
+      - Next indexed action
+  human_audit_table:
+    columns:
+      - Project
+      - Packet status
+      - Plain-language question
+  max_cell_chars: 500
+  sanitize:
+    replace_pipe_with: /
+    collapse_whitespace: true
+
+privacy:
+  public_repo_safe: true
+  placeholders_only: true
+  must_not_include:
+    - bot_tokens
+    - chat_ids
+    - slack_channel_ids
+    - webhook_urls
+    - credentials
+    - private_api_keys

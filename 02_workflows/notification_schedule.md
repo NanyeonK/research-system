@@ -2,7 +2,7 @@
 
 Updated: 2026-05-24
 
-Status: v2 workflow. Use with `04_templates/work_hours.yaml`.
+Status: v2 workflow. Use with `04_templates/work_hours.yaml` and `04_templates/dashboard_schema.yaml`.
 
 Purpose
 
@@ -83,6 +83,8 @@ Project-local configs may add deadline windows, but they must not create live ex
 ## 8. Delivery channels
 
 Hermes may deliver notifications through dashboard, changelog mirror, Telegram bridge, or configured Slack bridge. Channel tokens and IDs must live in `.env` or local config outside the public repo.
+
+`04_templates/dashboard_schema.yaml` defines the minimum read-only dashboard fields and the mapping from dashboard state to critical, digest, or silent notification handling. The dashboard is visibility only. It must not infer gate pass status, cross human gates, edit project repos, or expose private channel identifiers.
 
 `04_templates/work_hours.yaml` contains placeholders only. Do not commit real bot tokens, chat IDs, Slack channel IDs, or private webhook URLs.
 
