@@ -56,7 +56,7 @@ This type studies market design, legal or institutional architecture, tokenizati
 
 Classification rule
 
-Choose the type that controls the main contribution, not the data source. A paper using ML for a real-estate question is Type B unless interpretability or ML method behavior is the main contribution. A tokenized real-estate paper is Type E if the institutional mechanism is central, and Type A or B only if the core test is asset pricing or real-estate empirics.
+Choose the type that controls the main contribution, not the data source. Use `04_templates/research_type_decision.md` when classification is ambiguous or when a project spans real estate, ML, asset pricing, forecasting, or tokenization. A paper using ML for a real-estate question is Type B unless interpretability or ML method behavior is the main contribution. A tokenized real-estate paper is Type E if the institutional mechanism is central, and Type A or B only if the core test is asset pricing or real-estate empirics.
 
 ## 3. Phase overview
 
