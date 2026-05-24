@@ -20,19 +20,19 @@ If the main contribution is about institutional design, market design, governanc
 
 ## Ambiguous cases
 
-### Real estate plus ML
+### real estate + ML
 
 If interpretability, model behavior, explanation validity, or uncertainty quantification is the main contribution, route to Type D interpretable ML in finance.
 
 If the real-estate market question is the main contribution and ML is a tool for measurement, prediction, heterogeneity, or robustness, route to Type B real estate empirics.
 
-### Asset pricing plus ML
+### asset pricing + ML
 
 If the anomaly, factor, return cross-section, risk premium, or portfolio result is the main contribution, route to Type A empirical asset pricing.
 
 If the ML model's behavior, uncertainty, explanation, or decision-support role is the main contribution, route to Type D interpretable ML in finance.
 
-### Tokenization plus asset pricing
+### tokenization + asset pricing
 
 If institutional architecture, governance, contract design, disclosure, legal structure, or market plumbing is the main contribution, route to Type E conceptual or institutional.
 
