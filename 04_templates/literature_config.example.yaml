@@ -1,0 +1,15 @@
+# Literature layer example config for research-system v2.
+# Copy this file to a project-local config and replace placeholders.
+# Do not commit private paths, tokens, or real credentials.
+
+second_brain_literature_path: "<second_brain_literature_path>"
+project_graphify_path: "<project_graphify_path>"
+openalex_email: "<optional_contact_email>"
+semantic_scholar_api_key_env: "SEMANTIC_SCHOLAR_API_KEY"
+
+openalex:
+  default_limit: 25
+  default_sort: "relevance_score:desc"
+
+paper_request:
+  default_digest_target: "next scheduled research digest"
