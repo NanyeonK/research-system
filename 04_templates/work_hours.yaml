@@ -1,0 +1,93 @@
+timezone: Asia/Seoul
+
+core_hours:
+  start: "09:00"
+  end: "18:00"
+
+winding_down:
+  start: "18:00"
+  end: "20:00"
+
+fixed_push_times:
+  morning_briefing:
+    window_start: "09:00"
+    window_end: "12:00"
+    max_count: 1
+  midday_digest: "12:00"
+  afternoon_digest_1: "15:00"
+  afternoon_digest_2: "17:00"
+  end_of_day: "18:00"
+  overnight_handoff: "20:00"
+
+after_20_mode: critical_only
+
+weekend:
+  saturday: critical_only
+  sunday: critical_only
+
+critical_categories:
+  - human_gate_1_reached
+  - human_gate_2_reached
+  - locked_spec_change_needed
+  - direct_threat_changes_novelty
+  - integrity_gate_blocks_handoff
+  - external_side_effect_needs_approval
+  - credential_or_upload_needs_approval
+  - server_repo_branch_conflict
+  - compute_or_state_loss_risk
+
+noncritical_categories:
+  - routine_lane_completion
+  - artifact_written_no_blocker
+  - smoke_test_passed
+  - documentation_update
+  - literature_scan_no_direct_threat
+  - dashboard_mirror_updated
+  - archive_index_updated
+
+focus_mode_on: false
+focus_mode_allows:
+  - critical_categories
+  - mandatory_human_gates
+
+human_gate_push:
+  work_hours: immediate
+  after_20: critical_only_unless_opted_in
+  requires_artifact_path: true
+
+channels:
+  telegram:
+    enabled: false
+    bot_token_env: TELEGRAM_BOT_TOKEN
+    chat_id: "<telegram_chat_id>"
+  slack:
+    enabled: false
+    bot_token_env: SLACK_BOT_TOKEN
+    channel_id: "<slack_channel_id>"
+  dashboard:
+    enabled: true
+  changelog_mirror:
+    enabled: true
+
+payload_templates:
+  critical:
+    fields:
+      - project
+      - phase
+      - severity
+      - reason
+      - artifact_paths
+      - decision_needed
+      - options
+      - recommended_option
+      - what_stops_until_decision
+  digest:
+    fields:
+      - project
+      - phase
+      - window
+      - completed
+      - blocked
+      - next
+      - artifacts_changed
+      - human_action_needed
