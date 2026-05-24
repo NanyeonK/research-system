@@ -162,7 +162,7 @@ Alternative specs are dangerous because they can create silent spec drift. Use t
 
 ## 8. Archive index format
 
-`99_archive/INDEX.md` should use this format.
+`99_archive/INDEX.md` should use this format. For new projects, fork `04_templates/archive_index_template.md` into `99_archive/INDEX.md` before the first archive entry.
 
 ```markdown
 # Archive Index
