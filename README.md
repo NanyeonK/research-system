@@ -40,6 +40,7 @@ This system does not own prose mechanics. Paragraph drafting, voice, prose lint,
 - `00_START_HERE.md` — main entrypoint for research-system tasks
 - `01_policies/paper_project_framework.md` — full lifecycle policy
 - `01_policies/integrity_gate_policy.md` — fail-closed source/spec/claim/provenance gate before writing, review, submission, or post-revision stabilization
+- `02_workflows/research_pipeline_v2.md` — additive v2 master reference for phase routing, two human gates, literature timing, runtime responsibilities, and Phase 6 replication routing
 - `02_workflows/idea_evaluation.md` — idea evaluation and promotion gate
 - `02_workflows/autonomous_progression.md` — automatic continuation and human-stop gates
 - `02_workflows/project_structure.md` — standard repo/project structure
@@ -50,8 +51,11 @@ This system does not own prose mechanics. Paragraph drafting, voice, prose lint,
 - `02_workflows/source_deep_reading.md` — long-source extraction into source context
 - `02_workflows/specification_lock.md` — locks main empirical spine, data source/unit, preprocessing, methodology, outputs, and spec changes
 - `02_workflows/paper_factory_quality_gates.md` — viability, findings selection, audit ledger, number QA, and claim-validity gates adapted from paper_factory
+- `02_workflows/literature_layer.md` — v2 concentrated literature scans using internal graphify, project graphify, and external indexes
+- `02_workflows/notification_schedule.md` — v2 notification windows, critical/digest separation, focus mode, and dashboard delivery boundaries
+- `02_workflows/replication_workflow.md` — v2 Phase 6 replication package process, AEA-style package artifacts, environment locks, hashes, and no-live-upload rule
 - `references/source_verification_protocol.md` — source existence, claim-context, temporal, data-source, OpenAlex/index, and contamination checks adapted from academic-research-skills
-- `02_workflows/gate_status_protocol.md` — machine-readable `qa/gate_status.yaml` protocol and verifier for writing/review/submission readiness
+- `02_workflows/gate_status_protocol.md` — machine-readable `qa/gate_status.yaml` protocol and verifiers for writing/review/submission readiness
 - `02_workflows/blindspot_audit.md` — result/exhibit peripheral-vision audit
 - `02_workflows/presentation_deck_workflow.md` — research deck creation and QA
 - `02_workflows/referee_audit.md` — independent implementation, replication, and econometrics audit
@@ -59,12 +63,24 @@ This system does not own prose mechanics. Paragraph drafting, voice, prose lint,
 - `02_workflows/multi_agent_repo_orchestration.md` — exceptional/legacy multi-lane orchestration only
 - `references/paper_factory_adoption_2026-05-21.md` — adoption decision record for upstream paper_factory patterns
 - `references/academic_research_skills_adoption_2026-05-21.md` — adoption decision record for upstream academic-research-skills patterns
+- `references/writing_system_bridge.md` — boundary and handoff contract with sibling writing system
 - `03_agents/` — agent-specific loading notes
+- `03_agents/runtime_phase_matrix.md` — v2 phase-by-phase runtime responsibility split for Codex master, sub-Codex, Claude Code, Hermes, and Minimax
+- `03_agents/subagent_catalog.md` — v2 bounded subagent roles, inputs, outputs, and stop conditions
+- `03_agents/replication-builder.md` — Phase 6 replication package builder role contract
 - `04_templates/` — project, contract, gate, ledger, literature-map, literature-gap-search, section/paragraph-map, audit-ownership, and audit templates
+- `04_templates/research_type_decision.md` — Type A-E decision tree for ambiguous project classification
+- `04_templates/archive_index_template.md` — template for project-local `99_archive/INDEX.md`
+- `04_templates/dashboard_schema.yaml` — read-only dashboard schema and notification-state mapping
+- `04_templates/work_hours.yaml` — public-safe notification schedule placeholders
+- `04_templates/literature_config.example.yaml` — public-safe literature layer config placeholders
+- `04_templates/skeletons/` — Type A-E paper skeleton templates for Phase 4
+- `04_templates/exhibits/` — Type A-E exhibit starter templates and shared theme/caption files
 - `scripts/verify_paper_numbers.py` — first-pass manuscript number verifier for Gate 1
 - `scripts/verify_research_gate_status.py` — first-pass verifier for canonical artifacts, locked specs, and machine-readable gate status
+- `scripts/verify_writing_handoff_packet.py` — first-pass research-to-writing handoff verifier that reports `READY`, `READY_WITH_WAIVERS`, or `BLOCKED`
+- `scripts/literature/` — dependency-light literature scan helpers and paper-request template
 - `05_runs/` — dated system evolution records
-- `references/writing_system_bridge.md` — boundary and handoff contract with sibling writing system
 - `/Users/nanyeon/Library/CloudStorage/SynologyDrive-second_brain/writing_system/README.md` — sibling writing-system entrypoint for writing-specific rules
 
 ## Operating rules
@@ -118,6 +134,14 @@ target journal/style constraints, if known
 ```
 
 The authoritative writing evidence packet is defined in `references/writing_system_bridge.md`. If this README conflicts with the bridge, the bridge wins.
+
+Before prose drafting, run:
+
+```bash
+python3 /Users/nanyeon/Library/CloudStorage/SynologyDrive-second_brain/research_paper_system/scripts/verify_writing_handoff_packet.py <project_root>
+```
+
+Proceed only on `READY` or `READY_WITH_WAIVERS`. `READY_WITH_WAIVERS` requires the writing task to carry the listed limitations forward as claim boundaries. `BLOCKED` returns the project to research-system repair before writing starts.
 
 Then route writing-specific work to:
 
